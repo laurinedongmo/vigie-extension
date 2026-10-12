@@ -75,34 +75,35 @@ L'extension s'appuie sur un backend FastAPI (`237_Safe_Check V5`) hébergé sur 
 ---
 
 ## 🏗️ Architecture
-┌─────────────────────────────────────────────────────────────┐
-│ CHROME (navigateur) │
-│ │
-│ ┌───────────────────────────────────────────────────────┐ │
-│ │ BACKGROUND (service worker) │ │
-│ │ → Écoute les onglets │ │
-│ │ → Appelle l'API /predict │ │
-│ │ → Gère le cache et le badge │ │
-│ └───────────────────────────────────────────────────────┘ │
-│ ↕ │
-│ ┌───────────────────────────────────────────────────────┐ │
-│ │ CONTENT SCRIPT (content.js) │ │
-│ │ → Injecté dans chaque page │ │
-│ │ → Affiche coche + bandeaux │ │
-│ └───────────────────────────────────────────────────────┘ │
-│ ↕ │
-│ ┌───────────────────────────────────────────────────────┐ │
-│ │ POPUP (popup.html + popup.js) │ │
-│ │ → Interface au clic sur l'icône │ │
-│ └───────────────────────────────────────────────────────┘ │
-└─────────────────────────────────────────────────────────────┘
-↓
-┌─────────────────────────────────────────────────────────────┐
-│ BACKEND FastAPI (237_Safe_Check ) │
-│ https://sidikompagnie-vigie-api.hf.space/predict │
-└─────────────────────────────────────────────────────────────┘
 
-text
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    CHROME (navigateur)                      │
+│                                                             │
+│  ┌───────────────────────────────────────────────────────┐  │
+│  │  BACKGROUND (service worker)                          │  │
+│  │  → Écoute les onglets                                 │  │
+│  │  → Appelle l'API /predict                             │  │
+│  │  → Gère le cache et le badge                          │  │
+│  └───────────────────────────────────────────────────────┘  │
+│                          ↕                                  │
+│  ┌───────────────────────────────────────────────────────┐  │
+│  │  CONTENT SCRIPT (content.js)                          │  │
+│  │  → Injecté dans chaque page                           │  │
+│  │  → Affiche coche + bandeaux                           │  │
+│  └───────────────────────────────────────────────────────┘  │
+│                          ↕                                  │
+│  ┌───────────────────────────────────────────────────────┐  │
+│  │  POPUP (popup.html + popup.js)                        │  │
+│  │  → Interface au clic sur l'icône                      │  │
+│  └───────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────┘
+                          ↓
+┌─────────────────────────────────────────────────────────────┐
+│              BACKEND FastAPI (237_Safe_Check V1)            │
+│    https://sidikompagnie-vigie-api.hf.space/predict         │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ---
 
@@ -119,59 +120,74 @@ text
    ```bash
    git clone https://github.com/<ton-user>/vigie-extension.git
    cd vigie-extension
-Ouvre Chrome et va sur :
+   ```
 
-text
-chrome://extensions/
-Active le mode développeur (toggle en haut à droite)
+2. **Ouvre Chrome** et va sur :
+   ```
+   chrome://extensions/
+   ```
 
-Clique sur "Charger l'extension non empaquetée"
+3. **Active le mode développeur** (toggle en haut à droite)
 
-Sélectionne le dossier vigie-extension/
+4. **Clique sur "Charger l'extension non empaquetée"**
 
-Vérifie que l'extension apparaît avec l'icône 🛡️
+5. **Sélectionne le dossier** `vigie-extension/`
 
-⚙️ Configuration
-URL du backend
+6. **Vérifie** que l'extension apparaît avec l'icône 🛡️
+
+---
+
+## ⚙️ Configuration
+
+### URL du backend
+
 Par défaut, l'extension pointe vers le backend hébergé sur Hugging Face :
 
-javascript
+```javascript
 export const API_BASE_URL = "https://sidikompagnie-vigie-api.hf.space";
-Pour changer l'URL (ex: développement local), modifie lib/constants.js :
+```
 
-javascript
+Pour changer l'URL (ex: développement local), modifie `lib/constants.js` :
+
+```javascript
 // Développement local
 export const API_BASE_URL = "http://localhost:8000";
 
 // Production (Hugging Face)
 export const API_BASE_URL = "https://sidikompagnie-vigie-api.hf.space";
-📖 Utilisation
-Analyse automatique
-Navigue vers n'importe quel site
+```
 
-L'extension analyse en arrière-plan
+---
 
-Le verdict s'affiche automatiquement
+## 📖 Utilisation
 
-Consulter le verdict
-Clique sur l'icône Vigie dans la barre Chrome pour voir :
+### Analyse automatique
 
-Le verdict du site actif
+1. Navigue vers n'importe quel site
+2. L'extension analyse en arrière-plan
+3. Le verdict s'affiche automatiquement
 
-Le score de danger
+### Consulter le verdict
 
-Les signaux détectés
+Clique sur l'**icône Vigie** dans la barre Chrome pour voir :
+- Le verdict du site actif
+- Le score de danger
+- Les signaux détectés
+- Les actions disponibles
 
-Les actions disponibles
+### Ré-analyser un site
 
-Ré-analyser un site
-Dans le popup, clique sur "🔄 Réanalyser".
+Dans le popup, clique sur **"🔄 Réanalyser"**.
 
-Signaler un site suspect
-Dans le popup, clique sur "🚨 Signaler".
+### Signaler un site suspect
 
-📁 Structure du projet
-text
+Dans le popup, clique sur **"🚨 Signaler"**.
+
+---
+
+## 📁 Structure du projet
+
+```
 vigie-extension/
 ├── manifest.json              # Configuration Manifest V3
 ├── background.js              # Service worker
@@ -192,34 +208,35 @@ vigie-extension/
 │   ├── icon48.png             # Icône 48x48
 │   └── icon128.png            # Icône 128x128
 └── README.md                  # Ce fichier
-💻 Développement
-Modifier l'extension
-Modifie les fichiers dans vigie-extension/
+```
 
-Va sur chrome://extensions/
+---
 
-Clique sur ↻ Actualiser sur la carte Vigie
+## 💻 Développement
 
-Recharge la page pour voir les changements
+### Modifier l'extension
 
-Logs du service worker
-chrome://extensions/
+1. Modifie les fichiers dans `vigie-extension/`
+2. Va sur `chrome://extensions/`
+3. Clique sur **↻ Actualiser** sur la carte Vigie
+4. Recharge la page pour voir les changements
 
-Clique sur "Service Worker" sous Vigie
+### Logs du service worker
 
-La console DevTools s'ouvre
+1. `chrome://extensions/`
+2. Clique sur **"Service Worker"** sous Vigie
+3. La console DevTools s'ouvre
 
-Logs du content script
-Va sur n'importe quel site
+### Logs du content script
 
-F12 → Console
+1. Va sur n'importe quel site
+2. `F12` → Console
+3. Cherche les messages `[Vigie]`
 
-Cherche les messages [Vigie]
+### Tester l'API directement
 
-Tester l'API directement
 Dans la console du service worker :
-
-javascript
+```javascript
 fetch("https://sidikompagnie-vigie-api.hf.space/predict", {
   method: "POST",
   headers: { "Content-Type": "application/json" },
@@ -227,85 +244,118 @@ fetch("https://sidikompagnie-vigie-api.hf.space/predict", {
 })
 .then(r => r.json())
 .then(console.log);
-🧪 Tests
-Checklist de validation
-#	Test	Statut
-1	Extension chargée sans erreur	⬜
-2	Coche verte sur site vérifié	⬜
-3	Bandeau rouge sur site clone	⬜
-4	Bandeau gris sur site hors ligne	⬜
-5	Notification système sur page d'erreur	⬜
-6	Popup s'ouvre au clic	⬜
-7	Bouton "Réanalyser" fonctionne	⬜
-8	Bouton "Signaler" fonctionne	⬜
-9	Badge change selon verdict	⬜
-10	Cache fonctionne (2e visite rapide)	⬜
-Sites de test
-URL	Verdict attendu
-https://minfi.cm	bon_site
-https://ubacameroon.com	bon_site
-https://abk.com	inexistant
-https://site-fantome-12345.cm	inexistant
-🔒 Sécurité
-Ce que l'extension fait
-✅ Analyse les URLs visitées
+```
 
-✅ Envoie les URLs au backend pour analyse
+---
 
-✅ Affiche des avertissements visuels
+## 🧪 Tests
 
-Ce que l'extension ne fait PAS
-❌ Ne collecte aucune donnée personnelle
+### Checklist de validation
 
-❌ N'envoie pas l'historique de navigation
+| # | Test | Statut |
+|---|------|--------|
+| 1 | Extension chargée sans erreur | ⬜ |
+| 2 | Coche verte sur site vérifié | ⬜ |
+| 3 | Bandeau rouge sur site clone | ⬜ |
+| 4 | Bandeau gris sur site hors ligne | ⬜ |
+| 5 | Notification système sur page d'erreur | ⬜ |
+| 6 | Popup s'ouvre au clic | ⬜ |
+| 7 | Bouton "Réanalyser" fonctionne | ⬜ |
+| 8 | Bouton "Signaler" fonctionne | ⬜ |
+| 9 | Badge change selon verdict | ⬜ |
+| 10 | Cache fonctionne (2e visite rapide) | ⬜ |
 
-❌ N'accède pas aux mots de passe ou formulaires
+### Sites de test
 
-❌ Ne modifie pas le contenu des sites
+| URL | Verdict attendu |
+|-----|-----------------|
+| `https://minfi.cm` | `bon_site` |
+| `https://ubacameroon.com` | `bon_site` |
+| `https://abk.com` | `inexistant` |
+| `https://site-fantome-12345.cm` | `inexistant` |
 
-Permissions utilisées
-Permission	Rôle
-tabs	Écouter les changements d'onglet
-storage	Stocker les préférences locales
-webRequest	Capturer l'IP observée
-activeTab	Accéder à l'onglet actif
-notifications	Afficher les alertes système
-🗺️ Roadmap
-Version 5.1
-□ Mode sombre pour le popup
-□ Historique des sites analysés
-□ Export des statistiques en JSON
-Version 5.2
-□ Support multi-langues (FR + EN)
-□ Page d'options (paramètres utilisateur)
-□ Whitelist personnelle
-Version 6.0
-□ Support Firefox
-□ Support Edge
-□ Synchronisation cloud des préférences
-🤝 Contribution
+---
+
+## 🔒 Sécurité
+
+### Ce que l'extension fait
+
+- ✅ Analyse les URLs visitées
+- ✅ Envoie les URLs au backend pour analyse
+- ✅ Affiche des avertissements visuels
+
+### Ce que l'extension ne fait PAS
+
+- ❌ Ne collecte **aucune donnée personnelle**
+- ❌ N'envoie **pas** l'historique de navigation
+- ❌ N'accède **pas** aux mots de passe ou formulaires
+- ❌ Ne modifie **pas** le contenu des sites
+
+### Permissions utilisées
+
+| Permission | Rôle |
+|------------|------|
+| `tabs` | Écouter les changements d'onglet |
+| `storage` | Stocker les préférences locales |
+| `webRequest` | Capturer l'IP observée |
+| `activeTab` | Accéder à l'onglet actif |
+| `notifications` | Afficher les alertes système |
+
+---
+
+## 🗺️ Roadmap
+
+### Version 5.1
+- [ ] Mode sombre pour le popup
+- [ ] Historique des sites analysés
+- [ ] Export des statistiques en JSON
+
+### Version 5.2
+- [ ] Support multi-langues (FR + EN)
+- [ ] Page d'options (paramètres utilisateur)
+
+### Version 6.0
+- [ ] Support Firefox
+- [ ] Support Edge
+- [ ] Synchronisation cloud des préférences
+
+---
+
+## 🤝 Contribution
+
 Les contributions sont les bienvenues !
 
-Fork le projet
+1. Fork le projet
+2. Crée une branche (`git checkout -b feature/ma-feature`)
+3. Commit (`git commit -m 'Ajout de ma feature'`)
+4. Push (`git push origin feature/ma-feature`)
+5. Ouvre une Pull Request
 
-Crée une branche (git checkout -b feature/ma-feature)
+---
 
-Commit (git commit -m 'Ajout de ma feature')
+## 📄 Licence
 
-Push (git push origin feature/ma-feature)
+Ce projet est sous licence **MIT**. Voir le fichier `LICENSE` pour plus de détails.
 
-Ouvre une Pull Request
+---
 
-📄 Licence
-Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
+## 📞 Contact
 
-📞 Contact
-Auteur : DONGMO NGUETSOP Laurie
+- **Auteur** : Equipe de jeunes etudiants passionnees par la Tech
+- **Email** : DONGMO NGUETSOP Laurie
+- **Projet** : 237_Safe_Check V1
+- **Backend** : FastAPI + Random Forest + Playwright
+- **Hébergement** : Hugging Face Spaces
 
-Email : dongmolaurie@gmail.com
+---
 
-Projet : 237_Safe_Check 
+## 🙏 Remerciements
 
-Backend : FastAPI + Random Forest + Playwright
+- **ANTIC** (Agence Nationale des Technologies de l'Information et de la Communication)
+- **Communauté open-source camerounaise**
+- **Hugging Face** (hébergement gratuit du backend)
+- Tous les contributeurs du projet
 
-Hébergement : Hugging Face Spaces
+---
+
+**🛡️ Vigie — Votre tranquillité, sous surveillance.**
