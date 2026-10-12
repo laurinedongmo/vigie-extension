@@ -1,0 +1,303 @@
+/* ============================================================
+   Vigie — Styles du popup
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   Reset + variables
+   ------------------------------------------------------------ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --vigie-nuit:          #0F2A3F;
+  --vigie-nuit-clair:    #1A3A52;
+  --vigie-menthe:        #A8E6A3;
+  --vigie-menthe-fonce:  #7DD87A;
+  --vigie-fond:          #F7F7F2;
+  --vigie-blanc:         #FFFFFF;
+  --vigie-vert:          #22C55E;
+  --vigie-rouge:         #EF4444;
+  --vigie-orange:        #F59E0B;
+  --vigie-gris:          #6B7280;
+  --vigie-texte:         #0F2A3F;
+  --vigie-texte-doux:    #6B7280;
+  --vigie-bordure:       #E5E7EB;
+  --vigie-ombre:         0 4px 12px rgba(15, 42, 63, 0.08);
+  --vigie-radius:        16px;
+  --vigie-radius-pilule: 999px;
+  --vigie-font:          'Inter', -apple-system, BlinkMacSystemFont,
+                         'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+  width: 360px;
+  background: var(--vigie-fond);
+  font-family: var(--vigie-font);
+  color: var(--vigie-texte);
+  -webkit-font-smoothing: antialiased;
+}
+
+.vigie-popup {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ============================================================
+   1. EN-TÊTE
+   ============================================================ */
+.vigie-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--vigie-bordure);
+}
+
+.vigie-logo {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  background: var(--vigie-menthe);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vigie-header-texte h1 {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--vigie-nuit);
+  line-height: 1;
+  letter-spacing: -0.5px;
+}
+
+.vigie-header-texte p {
+  font-size: 11px;
+  color: var(--vigie-texte-doux);
+  margin-top: 3px;
+}
+
+/* ============================================================
+   2. CARTE DE STATUT
+   ============================================================ */
+.vigie-statut {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  border-radius: var(--vigie-radius);
+  background: var(--vigie-nuit);
+  color: var(--vigie-blanc);
+  transition: background 0.3s ease;
+}
+
+.vigie-statut-icone {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.vigie-statut-texte {
+  min-width: 0;
+  flex: 1;
+}
+
+.vigie-statut-titre {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.vigie-statut-domaine {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 3px;
+  word-break: break-all;
+}
+
+/* --- Variantes selon verdict --- */
+.vigie-statut-bon_site .vigie-statut-icone   { background: var(--vigie-menthe); }
+.vigie-statut-clone .vigie-statut-icone      { background: var(--vigie-rouge); }
+.vigie-statut-vieux .vigie-statut-icone      { background: var(--vigie-orange); }
+.vigie-statut-inexistant .vigie-statut-icone { background: var(--vigie-gris); }
+.vigie-statut-erreur .vigie-statut-icone     { background: var(--vigie-gris); }
+
+/* ============================================================
+   3. DÉTAILS
+   ============================================================ */
+.vigie-details {
+  background: var(--vigie-blanc);
+  border-radius: var(--vigie-radius);
+  padding: 12px 14px;
+  box-shadow: var(--vigie-ombre);
+}
+
+.vigie-detail-ligne {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  font-size: 13px;
+}
+
+.vigie-detail-ligne + .vigie-detail-ligne {
+  border-top: 1px solid var(--vigie-bordure);
+}
+
+.vigie-detail-label {
+  color: var(--vigie-texte-doux);
+}
+
+.vigie-detail-valeur {
+  font-weight: 600;
+  color: var(--vigie-texte);
+}
+
+/* ============================================================
+   4. RAISONS
+   ============================================================ */
+.vigie-raisons {
+  background: var(--vigie-blanc);
+  border-radius: var(--vigie-radius);
+  padding: 12px 14px;
+  box-shadow: var(--vigie-ombre);
+}
+
+.vigie-raisons-titre {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--vigie-texte-doux);
+  margin-bottom: 8px;
+}
+
+.vigie-raisons-liste {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.vigie-raisons-liste li {
+  font-size: 12px;
+  color: var(--vigie-texte);
+  padding-left: 14px;
+  position: relative;
+  line-height: 1.4;
+}
+
+.vigie-raisons-liste li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 6px;
+  height: 6px;
+  background: var(--vigie-rouge);
+  border-radius: 50%;
+}
+
+/* ============================================================
+   5. ACTIONS
+   ============================================================ */
+.vigie-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.vigie-action {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 14px;
+  border: none;
+  border-radius: var(--vigie-radius-pilule);
+  font-family: var(--vigie-font);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.vigie-action:hover {
+  transform: translateY(-1px);
+}
+
+.vigie-action:active {
+  transform: translateY(0);
+}
+
+.vigie-action:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.vigie-action-neutre {
+  background: var(--vigie-blanc);
+  color: var(--vigie-texte);
+  border: 1px solid var(--vigie-bordure);
+}
+
+.vigie-action-neutre:hover {
+  background: #F3F4F6;
+}
+
+.vigie-action-danger {
+  background: var(--vigie-rouge);
+  color: var(--vigie-blanc);
+}
+
+.vigie-action-danger:hover {
+  background: #DC2626;
+}
+/* Quand le bouton Signaler est caché, Réanalyser prend toute la largeur */
+.vigie-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.vigie-action:only-child {
+  flex: 1;
+}
+/* ============================================================
+   6. PIED DE PAGE
+   ============================================================ */
+.vigie-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding-top: 12px;
+  border-top: 1px solid var(--vigie-bordure);
+  font-size: 11px;
+  color: var(--vigie-texte-doux);
+}
+
+.vigie-footer-sep {
+  opacity: 0.5;
+}
+
+/* ============================================================
+   7. ACCESSIBILITÉ
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

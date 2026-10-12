@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vigie — Vérifier ce site</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+
+  <div class="vigie-popup">
+
+    <!-- ============================================================
+         EN-TÊTE
+         ============================================================ -->
+    <header class="vigie-header">
+      <div class="vigie-logo">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2L3 6v6c0 5 3.5 9.5 9 10 5.5-.5 9-5 9-10V6l-9-4z"
+                fill="#0F2A3F"/>
+          <path d="M8.5 12l2.5 2.5L16 9"
+                stroke="#A8E6A3" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="vigie-header-texte">
+        <h1>vigie</h1>
+        <p>Votre tranquillité, sous surveillance</p>
+      </div>
+    </header>
+
+    <!-- ============================================================
+         CARTE DE STATUT
+         ============================================================ -->
+    <section id="vigie-statut" class="vigie-statut vigie-statut-inconnu">
+      <div class="vigie-statut-icone" id="vigie-statut-icone">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" stroke="#FFFFFF" stroke-width="2"/>
+          <path d="M12 8v4M12 16h.01" stroke="#FFFFFF" stroke-width="2"
+                stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="vigie-statut-texte">
+        <div class="vigie-statut-titre" id="vigie-statut-titre">
+          Analyse en cours…
+        </div>
+        <div class="vigie-statut-domaine" id="vigie-statut-domaine">—</div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         DÉTAILS
+         ============================================================ -->
+    <section class="vigie-details" id="vigie-details">
+      <div class="vigie-detail-ligne">
+        <span class="vigie-detail-label">Score de danger</span>
+        <span class="vigie-detail-valeur" id="vigie-detail-score">—</span>
+      </div>
+      <div class="vigie-detail-ligne">
+        <span class="vigie-detail-label">Verdict</span>
+        <span class="vigie-detail-valeur" id="vigie-detail-verdict">—</span>
+      </div>
+      <div class="vigie-detail-ligne">
+        <span class="vigie-detail-label">Analysé à</span>
+        <span class="vigie-detail-valeur" id="vigie-detail-temps">—</span>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         RAISONS (affichées si disponibles)
+         ============================================================ -->
+    <section class="vigie-raisons" id="vigie-raisons" hidden>
+      <div class="vigie-raisons-titre">Signaux détectés</div>
+      <ul class="vigie-raisons-liste" id="vigie-raisons-liste"></ul>
+    </section>
+
+    <!-- ============================================================
+         ACTIONS
+         ============================================================ -->
+    <section class="vigie-actions">
+      <button id="vigie-btn-reanalyser" class="vigie-action vigie-action-neutre">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <path d="M21 12a9 9 0 11-3-6.7L21 8"
+                stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M21 3v5h-5" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Réanalyser
+      </button>
+
+      <!-- <button id="vigie-btn-signaler" class=" vigie-action vigie-action-danger" hidden>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2L1 21h22L12 2z" stroke="currentColor"
+                stroke-width="2" stroke-linejoin="round"/>
+          <path d="M12 9v5M12 17h.01" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        Signaler
+      </button> -->
+    </section>
+
+    <!-- ============================================================
+         PIED DE PAGE
+         ============================================================ -->
+    <footer class="vigie-footer">
+      <span id="vigie-footer-whitelist">Whitelist : — domaines</span>
+      <span class="vigie-footer-sep">•</span>
+      <span>Vigie V1</span>
+    </footer>
+
+  </div>
+
+  <script type="module" src="popup.js"></script>
+
+</body>
+</html>

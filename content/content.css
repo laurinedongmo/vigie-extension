@@ -1,0 +1,337 @@
+/* ============================================================
+   Vigie — Styles des affichages injectés
+   Thème : bleu nuit + menthe (charte Vigie)
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   Variables du thème
+   ------------------------------------------------------------ */
+:root {
+  --vigie-nuit:          #0F2A3F;
+  --vigie-nuit-clair:    #1A3A52;
+  --vigie-menthe:        #A8E6A3;
+  --vigie-menthe-fonce:  #7DD87A;
+  --vigie-blanc:         #FFFFFF;
+  --vigie-vert:          #22C55E;
+  --vigie-rouge:         #EF4444;
+  --vigie-orange:        #F59E0B;
+  --vigie-gris:          #6B7280;
+  --vigie-texte-blanc:   #FFFFFF;
+  --vigie-texte-doux:    rgba(255, 255, 255, 0.75);
+  --vigie-ombre:         0 10px 40px rgba(15, 42, 63, 0.25);
+  --vigie-ombre-forte:   0 20px 60px rgba(15, 42, 63, 0.35);
+  --vigie-radius:        20px;
+  --vigie-radius-pilule: 999px;
+  --vigie-font:          'Inter', -apple-system, BlinkMacSystemFont,
+                         'Segoe UI', Roboto, sans-serif;
+}
+
+/* ============================================================
+   1. COCHE VERTE (site vérifié)
+   ============================================================ */
+
+#vigie-coche {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-120px);
+  z-index: 2147483647;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 24px;
+  background: var(--vigie-nuit);
+  border-radius: var(--vigie-radius);
+  box-shadow: var(--vigie-ombre);
+  font-family: var(--vigie-font);
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  max-width: 90vw;
+}
+
+#vigie-coche.vigie-visible {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+.vigie-coche-icone {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  background: var(--vigie-menthe);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: vigie-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes vigie-pulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.08); }
+}
+
+.vigie-coche-texte {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.vigie-coche-titre {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--vigie-texte-blanc);
+  line-height: 1.2;
+}
+
+.vigie-coche-sous-titre {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--vigie-texte-doux);
+  line-height: 1.2;
+}
+
+/* ============================================================
+   2. BANDEAU (clone + hors ligne)
+   ============================================================ */
+
+#vigie-bandeau {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2147483647;
+  background: var(--vigie-nuit);
+  border-radius: var(--vigie-radius) var(--vigie-radius) 0 0;
+  box-shadow: var(--vigie-ombre-forte);
+  font-family: var(--vigie-font);
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+#vigie-bandeau.vigie-visible {
+  transform: translateY(0);
+}
+
+.vigie-bandeau-contenu {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.vigie-bandeau-icone {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+}
+
+.vigie-bandeau-texte {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.vigie-bandeau-titre {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--vigie-texte-blanc);
+  line-height: 1.3;
+}
+
+.vigie-bandeau-message {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--vigie-texte-doux);
+  line-height: 1.4;
+}
+
+.vigie-bandeau-detail {
+  font-size: 12px;
+  color: var(--vigie-texte-doux);
+  margin-top: 2px;
+}
+
+.vigie-bandeau-detail strong {
+  color: var(--vigie-rouge);
+  font-weight: 700;
+}
+
+/* ------------------------------------------------------------
+   Variantes de bandeau
+   ------------------------------------------------------------ */
+
+.vigie-bandeau-clone {
+  border-top: 4px solid var(--vigie-rouge);
+}
+
+.vigie-bandeau-hors-ligne {
+  background: var(--vigie-nuit-clair);
+  border-top: 4px solid var(--vigie-gris);
+}
+
+/* ============================================================
+   3. BOUTONS
+   ============================================================ */
+
+.vigie-bandeau-boutons {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.vigie-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: var(--vigie-radius-pilule);
+  font-family: var(--vigie-font);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  position: relative;
+}
+
+.vigie-btn:hover {
+  transform: translateY(-2px);
+}
+
+.vigie-btn:active {
+  transform: translateY(0);
+}
+
+/* --- Bouton vert (Aller au bon site) --- */
+.vigie-btn-vert {
+  background: var(--vigie-menthe);
+  color: var(--vigie-nuit);
+  box-shadow: 0 4px 12px rgba(168, 230, 163, 0.35);
+}
+
+.vigie-btn-vert:hover {
+  background: var(--vigie-menthe-fonce);
+  box-shadow: 0 6px 20px rgba(168, 230, 163, 0.5);
+}
+
+/* --- Bouton jaune (Continuer / Réessayer) --- */
+.vigie-btn-jaune {
+  background: var(--vigie-orange);
+  color: var(--vigie-texte-blanc);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35);
+}
+
+.vigie-btn-jaune:hover {
+  background: #D97706;
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.5);
+}
+
+.vigie-btn-jaune.vigie-attente {
+  background: var(--vigie-rouge);
+  animation: vigie-shake 0.4s ease;
+}
+
+@keyframes vigie-shake {
+  0%, 100% { transform: translateX(0); }
+  25%      { transform: translateX(-5px); }
+  75%      { transform: translateX(5px); }
+}
+
+/* --- Bouton gris (Ignorer) --- */
+.vigie-btn-gris {
+  background: transparent;
+  color: var(--vigie-texte-blanc);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.vigie-btn-gris:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* --- Badge "2 clics" --- */
+.vigie-badge-clics {
+  display: inline-block;
+  padding: 2px 8px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: var(--vigie-radius-pilule);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-left: 4px;
+}
+
+/* ============================================================
+   4. RESPONSIVE (mobile)
+   ============================================================ */
+
+@media (max-width: 640px) {
+  .vigie-bandeau-contenu {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px 18px;
+  }
+
+  .vigie-bandeau-icone {
+    width: 40px;
+    height: 40px;
+  }
+
+  .vigie-bandeau-titre {
+    font-size: 15px;
+  }
+
+  .vigie-bandeau-boutons {
+    width: 100%;
+  }
+
+  .vigie-btn {
+    flex: 1;
+    justify-content: center;
+    padding: 12px 14px;
+    font-size: 13px;
+  }
+
+  #vigie-coche {
+    padding: 12px 18px;
+    max-width: calc(100vw - 24px);
+  }
+
+  .vigie-coche-titre {
+    font-size: 13px;
+  }
+
+  .vigie-coche-sous-titre {
+    font-size: 11px;
+  }
+}
+
+/* ============================================================
+   5. ACCESSIBILITÉ (reduced motion)
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  #vigie-coche,
+  #vigie-bandeau,
+  .vigie-btn,
+  .vigie-coche-icone {
+    transition: none !important;
+    animation: none !important;
+  }
+}

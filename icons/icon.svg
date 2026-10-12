@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <!-- Fond : cercle bleu nuit -->
+  <circle cx="64" cy="64" r="60" fill="#0F2A3F"/>
+
+  <!-- Bouclier (symbole de protection) -->
+  <path d="M64 22 L100 36 L100 64 C100 88 84 104 64 110 C44 104 28 88 28 64 L28 36 Z"
+        fill="#1A3A52"
+        stroke="#A8E6A3"
+        stroke-width="3"
+        stroke-linejoin="round"/>
+
+  <!-- Coche menthe (symbole de vérification) -->
+  <path d="M48 64 L60 76 L82 52"
+        stroke="#A8E6A3"
+        stroke-width="8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        fill="none"/>
+</svg>
