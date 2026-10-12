@@ -19,7 +19,7 @@ Extension Chrome qui protège les utilisateurs contre le phishing, le typosquatt
 - [Tests](#-tests)
 - [Sécurité](#-sécurité)
 - [Roadmap](#-roadmap)
-- [Licence](#-licence)
+
 
 ---
 
@@ -305,16 +305,16 @@ fetch("https://sidikompagnie-vigie-api.hf.space/predict", {
 
 ## 🗺️ Roadmap
 
-### Version 5.1
+### Version 1.1
 - [ ] Mode sombre pour le popup
 - [ ] Historique des sites analysés
 - [ ] Export des statistiques en JSON
 
-### Version 5.2
+### Version 1.2
 - [ ] Support multi-langues (FR + EN)
 - [ ] Page d'options (paramètres utilisateur)
 
-### Version 6.0
+### Version 2.0
 - [ ] Support Firefox
 - [ ] Support Edge
 - [ ] Synchronisation cloud des préférences
@@ -333,16 +333,11 @@ Les contributions sont les bienvenues !
 
 ---
 
-## 📄 Licence
-
-Ce projet est sous licence **MIT**. Voir le fichier `LICENSE` pour plus de détails.
-
----
 
 ## 📞 Contact
 
 - **Auteur** : Equipe de jeunes etudiants passionnees par la Tech
-- **Email** : DONGMO NGUETSOP Laurie
+- **Email** : dongmolaurie@gmail.com
 - **Projet** : 237_Safe_Check V1
 - **Backend** : FastAPI + Random Forest + Playwright
 - **Hébergement** : Hugging Face Spaces
